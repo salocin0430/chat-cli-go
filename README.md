@@ -84,7 +84,7 @@ The project follows a hexagonal and clear  architecture approach with clear sepa
 1. Clone the repository:
    ```bash
    git clone https://github.com/salocin0430/chat-cli-go
-   cd chat-cli
+   cd chat-cli-go
    ```
 
 2. Start NATS server using Docker Compose:
