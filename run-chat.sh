@@ -34,9 +34,26 @@ if [[ "$(docker images -q chat-cli 2> /dev/null)" == "" ]]; then
   docker build -t chat-cli .
 fi
 
-# Run the container
-echo "Connecting to $NATS_URL as $NAME in channel $CHANNEL"
-docker run -it --network host chat-cli \
-  -nats "$NATS_URL" \
-  -name "$NAME" \
-  -channel "$CHANNEL" 
+# Detect OS and set appropriate docker run command
+case "$(uname -s)" in
+    MINGW*|CYGWIN*|MSYS*)
+        # Windows
+        echo "Running on Windows..."
+        winpty docker run -it \
+          --network host \
+          chat-cli \
+          -nats "$NATS_URL" \
+          -name "$NAME" \
+          -channel "$CHANNEL"
+        ;;
+    *)
+        # Linux/Mac
+        echo "Running on Unix-like system..."
+        docker run -it \
+          --network host \
+          chat-cli \
+          -nats "$NATS_URL" \
+          -name "$NAME" \
+          -channel "$CHANNEL"
+        ;;
+esac 
