@@ -83,7 +83,7 @@ The project follows a hexagonal and clear  architecture approach with clear sepa
 ### Quick Start
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/chat-cli.git
+   git clone https://github.com/salocin0430/chat-cli-go
    cd chat-cli
    ```
 
